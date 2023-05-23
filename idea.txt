@@ -1,0 +1,21 @@
+So the idea for this metroidvania would be a fantasy based one!
+
+What about a reverse metroidvania when instead of going down, you are coming back up.
+
+So after pressing start in the menu, a cutscene plays where you are thrown into a pit and you fall down, all the way into the bottom and you get trapped into the dungeon
+
+So the theme will be a dungeon, so I'll need some dungeon assets. 
+
+I would like to add other areas into the game but I am pretty limited. So I'll stick to a overall dungeon theme with some caverns sprinkled in
+
+So we will have dungeon which will be what is mostly there and 
+
+Some items:
+	-> Sword -> can damage enemies, can cut rope
+	-> Armour -> can help you sink, protect you, can use as weight for pressure plates
+	-> Torch -> can lightup dark areas, can burn wood, can shoot arows through to make lit arrows
+	-> Bow -> long range weapon, can be uses for puzzles can be used to zipline down ropes
+	-> Ropes -> Can be used to reach higher places, Can ties things together
+	-> Bombs -> Can blow things up, can send things rocketing, can use to to destroy enemies, can be used to solve puzzles
+
+	The game has to be 3 hours long so, I better get to it

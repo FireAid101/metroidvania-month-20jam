@@ -4,13 +4,23 @@ Texture LoadTexture(const char *path, State *state)
 {
     Texture result;
 
-    SDL_Surface *surf = NULL;
+    SDL_Surface *surf;
 
-    surf = IMG_Load(strcat(SDL_GetBasePath(), path));
+    int size = strlen(SDL_GetBasePath()) + strlen(path);
+
+    char *finalpath = malloc(size * sizeof(char));
+    finalpath = strcpy(finalpath, SDL_GetBasePath());
+    finalpath = strcat(finalpath, path);
+
+    surf = IMG_Load(finalpath);
+
+    free(finalpath);
 
     if (surf == NULL)
     {
         printf("Error: File couldn't be loaded\n");
+        result.ptr_data = NULL;
+        return result;
     }
    
     result.ptr_data = SDL_CreateTextureFromSurface(state->ptr_renderer, surf);

@@ -3,6 +3,7 @@
 
 #include "engine/state.h"
 #include "engine/graphics.h"
+#include "map.h"
 
 typedef struct 
 {
@@ -10,6 +11,7 @@ typedef struct
 
     Texture test_texture;
     SDL_FRect test_rect;
+    TileMap tileMap;
 } Game;
 
 void LoadGame(Game *ptr_game);

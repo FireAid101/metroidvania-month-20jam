@@ -11,10 +11,13 @@ void LoadGame(Game *ptr_game)
 	ptr_game->test_rect.h = 100.0f;
 	
  	ptr_game->test_texture = LoadTexture("rsrc/img/test.png", &ptr_game->gameState);    
+
+	ptr_game->tileMap = LoadTileMap("asdasd");
 }
 
 void UnloadGame(Game *ptr_game)
 {
+	UnloadTileMap(&ptr_game->tileMap);
     UnloadTexture(&ptr_game->test_texture);
 	DestroyState(&ptr_game->gameState);
 }

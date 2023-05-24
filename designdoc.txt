@@ -1,0 +1,90 @@
+Ok so this is the final design doc for the game.
+
+The game is a fantasy metroidvania set in the medieval times with some elements that aren't real like walking skeltons, etc..
+
+You play as the soon to be king who gets attacked on his corination day and chucked down into a well which is actually a dungeon. 
+
+You start at the bottom of the dungeon with no gear and you have to make it back out to the surface.
+Spolier once you actually reach the top of the well, you notice that it has been blocked but by some secret passage you find you go to the next area which is the caverns and then after that you reach the castle. Which being the final area of the game.
+
+So in total the game will have 3 separate areas, each with it's own items, puzzles, enemies and bosses.
+
+I want to teach the player via discovery and experimentation and not by text. This will draw the player eto playing the game even more because it creates a personal sense of discovery
+
+I want to also tease the player with paths the cannot access just yet. ( I am thinking in the starting area the exit is right above you but you cannot reach it just yet.
+
+For an increased discovery factor I need to have multiple possibilities in solving problems, so the game will feel even more personalised.
+
+There will be about a boss in each area, as well as 3 kinds of enemies in also.
+
+More detail on each area.
+
+	Area 1: Dungeons:
+		This is your starting area where you begin the game.
+		
+		You start by getting the sword.
+		
+		Then you find the armour 
+		
+		You shall be fighting hordes of skeltons.
+
+		Then you find the Rope
+
+		I want this level to have some traps that you and enemies can set off.
+
+	You then use the rope to escape the well but then the entrance is blocked. 
+
+	Area 2: Canverns
+
+		This the is second area in the game
+
+		You will find the torch here
+
+		You will then explore for a while then find bombs.
+
+		Right after that you fight the next boss.
+
+		Which will be a big knight.
+
+		has water that you have to navigate and you can use it towards you advantage
+
+	Area 3: Castle
+
+		Here you will get the bow.
+		
+		What makes this area special is that you will get a lot more puzzles.
+
+		Then you fight the guy who chucked you in the well in the first place but you will be chasing him 			for a while. Then you defeat him and win the game.
+
+	Now for the bosses in more detail:
+
+		1. The Horde of skeletons won't be your typical boss because instead you will ne fighting against 			loads of enemy skeletons.
+
+		2. For the knight, hw will be massive and have a big sword that he will slam and slash.
+
+		3. For the final boss, the guy who chucked you into the hole: He would be a flying wizard
+
+	For Items:
+		
+		1. Heart containers - which give you more health
+		2. Arrows - ammunition for your bow - can be shot, go through fire, puzzle solvers
+		3. Bombs - consumable explosives that you can throw or drop, can damage enemies, send items flying, can open up passages,
+		4. Maybe ropes - I am not sure if that would really be great. Can be used in puzzles, can be used to reach higher places
+
+	Enemies:
+		For Area 1:
+			Skeltons - runs towards you in a straight line to do some damage.
+			Slimes - Hops toward you
+			
+		For Area 2:
+			Bats - flying enemies that make a B-line toward you
+			Spiders - creatures that can crawl up walls and that eyes glow in the dark
+			Piranas - fish that come to bite you
+			Alien Plants - stay put and haul projectiles toward you
+
+		For Area 3:
+			Guards - They have spears and will attack, run and dogde attacks
+			Archers - Have bows that shoot arrows at you. Like to keep their distance but will engage with a dagger in close range if they see no other option.
+			Golems - Tough enemies that are kinda giants. Their attacks have a bit of oumph to them.
+	
+		Next to do is the map. Then the art.

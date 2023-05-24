@@ -19,3 +19,15 @@ Some items:
 	-> Bombs -> Can blow things up, can send things rocketing, can use to to destroy enemies, can be used to solve puzzles
 
 	The game has to be 3 hours long so, I better get to it
+
+tips for creating a metroidvania:
+
+	1. Let the game teach the mechanics without saying anything. Let the players discover
+	2. Tease the player with areas that they cannot access yet
+	3. Have multiple possibilities for the mechanics for more discovery possibitlies.
+
+	world rules:
+
+	1. Draft the map
+	2. Develop the timeline (the keys, items, bossess etc to progress the game)
+

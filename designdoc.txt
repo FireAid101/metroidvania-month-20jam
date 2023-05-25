@@ -23,7 +23,7 @@ More detail on each area.
 		This is your starting area where you begin the game.
 		
 		You start by getting the sword.
-		
+
 		Then you find the armour 
 		
 		You shall be fighting hordes of skeltons.

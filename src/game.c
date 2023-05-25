@@ -12,7 +12,10 @@ void LoadGame(Game *ptr_game)
 	
  	ptr_game->test_texture = LoadTexture("rsrc/img/test.png", &ptr_game->gameState);    
 
-	ptr_game->tileMap = LoadTileMap("asdasd");
+	ptr_game->tileMap = LoadTileMap("rsrc/maps/testmap.map", &ptr_game->gameState);
+	
+	ptr_game->camera.x = 0;
+	ptr_game->camera.y = 0;
 }
 
 void UnloadGame(Game *ptr_game)
@@ -26,6 +29,8 @@ void UpdateGame(Game *ptr_game, float deltaTime)
 {
 	ptr_game->test_rect.x += deltaTime * 20.0f;
 	ptr_game->test_rect.y += deltaTime * 20.0f;
+
+	HandleCamera(&ptr_game->camera);
 }
 
 void DrawGame(Game *ptr_game)
@@ -33,7 +38,8 @@ void DrawGame(Game *ptr_game)
     StartDrawState(&ptr_game->gameState);
     
     SDL_SetRenderDrawColor(ptr_game->gameState.ptr_renderer, 0, 255, 0, 255);
-	SDL_RenderCopyF(ptr_game->gameState.ptr_renderer, ptr_game->test_texture.ptr_data, NULL, &ptr_game->test_rect);
+
+	DrawMap(ptr_game->tileMap, &ptr_game->gameState, &ptr_game->camera);
 
     EndDrawState(&ptr_game->gameState);
 }

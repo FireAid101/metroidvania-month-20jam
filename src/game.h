@@ -10,6 +10,7 @@ typedef struct
     State gameState;
 
     Texture test_texture;
+    Camera camera;
     SDL_FRect test_rect;
     TileMap tileMap;
 } Game;

@@ -12,6 +12,8 @@ State CreateState()
 
 	result.ptr_renderer = SDL_CreateRenderer(result.ptr_window, -1, 0);
 
+	SDL_RenderSetLogicalSize(result.ptr_renderer, 320,240);
+
 	result.isDone = false;
 
 	return result;

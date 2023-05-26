@@ -2,16 +2,16 @@
 #define GRAPHICS_H
 
 #include "state.h"
-#include <string.h>
-#include <stdio.h>
+#include <string>
+#include <iostream>
 
-typedef struct 
+struct Texture 
 {
     SDL_Texture *ptr_data;
     int width, height;
-} Texture;
+}; 
 
-Texture LoadTexture(const char *path, State *state);
-void UnloadTexture(Texture *ptr_texture);
+Texture LoadTexture(std::string path, State &state);
+void UnloadTexture(Texture &texture);
 
 #endif 

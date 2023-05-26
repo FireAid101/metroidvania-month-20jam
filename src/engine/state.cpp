@@ -20,34 +20,34 @@ State CreateState()
 }
 
 // For computer platforms, the web build will use something else
-void HandleStateEvents(State *ptr_state)
+void HandleStateEvents(State &state)
 {
-	while(SDL_PollEvent(&ptr_state->event))
+	while(SDL_PollEvent(&state.event))
 	{
-		switch(ptr_state->event.type)
+		switch(state.event.type)
 		{
 			case SDL_QUIT:
-				ptr_state->isDone = true;
+				state.isDone = true;
 				break;
 		}
 	}
 }
 
-void StartDrawState(State *ptr_state)
+void StartDrawState(State &state)
 {
-	SDL_SetRenderDrawColor(ptr_state->ptr_renderer, 0, 0, 0, 255);
-	SDL_RenderClear(ptr_state->ptr_renderer);
+	SDL_SetRenderDrawColor(state.ptr_renderer, 0, 0, 0, 255);
+	SDL_RenderClear(state.ptr_renderer);
 }
 
-void EndDrawState(State *ptr_state)
+void EndDrawState(State &state)
 {
-	SDL_RenderPresent(ptr_state->ptr_renderer);
+	SDL_RenderPresent(state.ptr_renderer);
 }
 
-void DestroyState(State *ptr_state)
+void DestroyState(State &state)
 {
-	SDL_DestroyRenderer(ptr_state->ptr_renderer);
-	SDL_DestroyWindow(ptr_state->ptr_window);
+	SDL_DestroyRenderer(state.ptr_renderer);
+	SDL_DestroyWindow(state.ptr_window);
 	IMG_Quit();
 	SDL_Quit();
 }

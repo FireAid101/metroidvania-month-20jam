@@ -5,7 +5,7 @@
 #include "engine/graphics.h"
 #include "map.h"
 
-typedef struct 
+struct Game 
 {
     State gameState;
 
@@ -13,11 +13,11 @@ typedef struct
     Camera camera;
     SDL_FRect test_rect;
     TileMap tileMap;
-} Game;
+};
 
-void LoadGame(Game *ptr_game);
-void UnloadGame(Game *ptr_game);
-void UpdateGame(Game *ptr_game, float deltaTime);
-void DrawGame(Game *ptr_game);
+void LoadGame(Game &game);
+void UnloadGame(Game &game);
+void UpdateGame(Game &game, float deltaTime);
+void DrawGame(Game &game);
 
 #endif

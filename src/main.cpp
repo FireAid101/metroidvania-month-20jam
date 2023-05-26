@@ -6,24 +6,24 @@ int main(int argc, char **argv)
 
 	float currentTime = 0, lastTime = 0, deltaTime = 0;
 
-	LoadGame(&game);
+	LoadGame(game);
 
 	while (!game.gameState.isDone)
 	{
 		// Update time
 		lastTime = currentTime;
 		
-		HandleStateEvents(&game.gameState);
+		HandleStateEvents(game.gameState);
 
-		UpdateGame(&game, deltaTime);
+		UpdateGame(game, deltaTime);
 
-		DrawGame(&game);
+		DrawGame(game);
 
 		// Finish up framerate stuff
 		currentTime = SDL_GetTicks();
 		deltaTime = (currentTime - lastTime) / 1000.0f;
 	}
 
-	UnloadGame(&game);
+	UnloadGame(game);
 	return 0;
 }

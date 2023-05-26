@@ -7,26 +7,26 @@ void HandleCamera(Camera &camera)
 
     if (key_state[SDL_SCANCODE_LEFT])
     {
-        camera.x -= 5;
-        camera.dx += 5;
+        camera.x -= 1;
+        camera.dx += 1;
     }
 
     if (key_state[SDL_SCANCODE_RIGHT])
     {
-        camera.x += 5;
-        camera.dx -= 5;        
+        camera.x += 1;
+        camera.dx -= 1;        
     }
     
     if (key_state[SDL_SCANCODE_UP])
     {
-        camera.y -= 5;
-        camera.dy += 5;    
+        camera.y -= 1;
+        camera.dy += 1;    
     }
 
     if (key_state[SDL_SCANCODE_DOWN])
     {
-        camera.y += 5;
-        camera.dy -= 5;    
+        camera.y += 1;
+        camera.dy -= 1;    
     }
 }
 
@@ -51,7 +51,6 @@ TileMap LoadTileMap(std::string path, State &state)
     {
         result.amountOfTiles = 0;
 
-        int globalIndex = 0;
         while (!tileMapInfoFile.eof())
         {
             std::string line;
@@ -71,27 +70,30 @@ TileMap LoadTileMap(std::string path, State &state)
             }
 
             int number;
+            
+            TileInfo info;
+
             number = std::atoi(line.substr(0, spacePositions[0]).c_str());            
-            result.mapTileInfo[globalIndex].src.x = number;
+            info.src.x = number;
 
             number = std::atoi(line.substr(spacePositions[0] + 1, spacePositions[1] - spacePositions[0]).c_str());            
-            result.mapTileInfo[globalIndex].src.y = number;
+            info.src.y = number;
 
             number = std::atoi(line.substr(spacePositions[1] + 1, spacePositions[2] - spacePositions[1]).c_str());
-            result.mapTileInfo[globalIndex].src.w = number;
+            info.src.w = number;
 
             number = std::atoi(line.substr(spacePositions[2] + 1, spacePositions[3] - spacePositions[2]).c_str());
-            result.mapTileInfo[globalIndex].src.h = number;   
+            info.src.h = number;   
 
             if (line[line.length() - 1] == 't')
             {
-                result.mapTileInfo[globalIndex].isSolid = true;
+                info.isSolid = true;
             }
             else if (line[line.length() - 1] == 'f')
             {
-                result.mapTileInfo[globalIndex].isSolid = false;
+                info.isSolid = false;
             }
-            globalIndex++;
+            result.mapTileInfo.push_back(info);
             result.amountOfTiles++;
         } 
     }
@@ -128,7 +130,8 @@ TileMap LoadTileMap(std::string path, State &state)
             // Loop through all tiles
             for (int x = 0; x < result.width; x++)
             {
-                int index = atoi(&line[x * 2]);
+                char c = newLine[x * 2];
+                int index = c - '0';
 
                 SDL_Rect src;
                 SDL_Rect dst;
@@ -165,16 +168,16 @@ void DrawMap(TileMap map, State &state, Camera &camera)
     {
         for(int x = 0; x < 25; x++)
         {
-            int location = (camera.y * 20) + (y * 20) + camera.x + x;
-            if (location < map.dst_rects.size())
-            {
-                SDL_Rect rct = map.dst_rects[location];
+            //int location = (camera.y * 20) + (y * 20) + camera.x + x;
+            //if (location < map.dst_rects.size())
+            //{
+                SDL_Rect rct = map.dst_rects[y * 20 + x];
                
                 rct.x += camera.dx;
                 rct.y += camera.dy;
             
-                SDL_RenderCopy(state.ptr_renderer, map.mapTileSet.ptr_data, &map.src_rects[location], &rct);
-            }
+                SDL_RenderCopy(state.ptr_renderer, map.mapTileSet.ptr_data, &map.src_rects[y * 20 + x], &rct);
+           // }
         }
     }
 }

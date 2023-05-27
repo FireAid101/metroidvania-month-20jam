@@ -86,7 +86,7 @@ void UpdatePlayer(Player &player, Camera &camera)
     {
         if (player.vX < 0)
         {
-            player.vX += 0.2f;
+            player.vX += 0.4f;
 
             if(player.vX >= 0)
             {
@@ -96,7 +96,7 @@ void UpdatePlayer(Player &player, Camera &camera)
         
         if (player.vX > 0)
         {
-            player.vX -= 0.2f;
+            player.vX -= 0.4f;
 
             if (player.vX <= 0)
             {
@@ -109,7 +109,7 @@ void UpdatePlayer(Player &player, Camera &camera)
     {
         if (player.vY < 0)
         {
-            player.vY += 0.2f;
+            player.vY += 0.4f;
 
             if (player.vX >= 0)
             {
@@ -119,7 +119,7 @@ void UpdatePlayer(Player &player, Camera &camera)
         
         if (player.vY > 0)
         {
-            player.vY -= 0.2f;
+            player.vY -= 0.4f;
 
             if (player.vY <= 0)
             {

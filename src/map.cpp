@@ -30,6 +30,7 @@ void HandleCamera(Camera &camera)
         camera.y += CAMERA_CONSTANT;
         camera.dy -= CAMERA_CONSTANT;    
     }
+
 }
 
 // Creates and loads the whole tilemap
@@ -166,22 +167,25 @@ TileMap LoadTileMap(std::string path, State &state)
 
 void DrawMap(TileMap map, State &state, Camera &camera)
 {
-    for (int y = 0; y < 10; y++)
+    int drawcalls = 0;
+    for (int y = 0; y < 16; y++)
     {
-        for(int x = 0; x < 10; x++)
+        for(int x = 0; x < 21; x++)
         {
-            //int location = (camera.y * 20) + (y * 20) + camera.x + x;
-            //if (location < map.dst_rects.size())
-            //{
-                SDL_Rect rct = map.dst_rects[y * 30 + x];
+            int location = ((camera.y / 16) * map.width) + (y * map.width) + (camera.x / 16) + x;
+            if (location < map.dst_rects.size())
+            {
+                SDL_Rect rct = map.dst_rects[location];
                
                 rct.x += camera.dx;
                 rct.y += camera.dy;
             
-                SDL_RenderCopy(state.ptr_renderer, map.mapTileSet.ptr_data, &map.src_rects[y * 30 + x], &rct);
-           // }
+                SDL_RenderCopy(state.ptr_renderer, map.mapTileSet.ptr_data, &map.src_rects[location], &rct);
+                drawcalls++;
+            }
         }
     }
+    std::cout << "Draw Calls: " << drawcalls << std::endl;
 }
 
 void UnloadTileMap(TileMap &tileMap)

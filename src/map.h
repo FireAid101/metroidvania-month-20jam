@@ -19,8 +19,6 @@ struct Camera
     int x, y;
 };
 
-void HandleCamera(Camera &camera);
-
 // This data structure holds all the different tile options in a file that makes adding, removing and even editing tile properties easier 
 struct TileInfo
 {

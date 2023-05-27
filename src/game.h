@@ -4,14 +4,15 @@
 #include "engine/state.h"
 #include "engine/graphics.h"
 #include "map.h"
+#include "player.h"
 
 struct Game 
 {
     State gameState;
 
-    Texture test_texture;
+    Player player;
+
     Camera camera;
-    SDL_FRect test_rect;
     TileMap tileMap;
 };
 

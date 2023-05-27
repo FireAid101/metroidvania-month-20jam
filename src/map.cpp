@@ -1,38 +1,5 @@
 #include "map.h"
 
-#define CAMERA_CONSTANT 2
-
-// Camera Handle function -- DO NOT USE IN GAME - THIS IS JUST UNTIL I HAVE A PLAYER
-void HandleCamera(Camera &camera)
-{
-    const Uint8 *key_state = SDL_GetKeyboardState(NULL);
-
-    if (key_state[SDL_SCANCODE_LEFT])
-    {
-        camera.x -= CAMERA_CONSTANT;
-        camera.dx += CAMERA_CONSTANT;
-    }
-
-    if (key_state[SDL_SCANCODE_RIGHT])
-    {
-        camera.x += CAMERA_CONSTANT;
-        camera.dx -= CAMERA_CONSTANT;        
-    }
-    
-    if (key_state[SDL_SCANCODE_UP])
-    {
-        camera.y -= CAMERA_CONSTANT;
-        camera.dy += CAMERA_CONSTANT;    
-    }
-
-    if (key_state[SDL_SCANCODE_DOWN])
-    {
-        camera.y += CAMERA_CONSTANT;
-        camera.dy -= CAMERA_CONSTANT;    
-    }
-
-}
-
 // Creates and loads the whole tilemap
 TileMap LoadTileMap(std::string path, State &state)
 {
@@ -167,25 +134,26 @@ TileMap LoadTileMap(std::string path, State &state)
 
 void DrawMap(TileMap map, State &state, Camera &camera)
 {
-    int drawcalls = 0;
     for (int y = 0; y < 16; y++)
     {
         for(int x = 0; x < 21; x++)
         {
+            // Get the location in the array by using simple grid map calculations
             int location = ((camera.y / 16) * map.width) + (y * map.width) + (camera.x / 16) + x;
+            
+            // Check to see if any tiles are even at that index
             if (location < map.dst_rects.size())
             {
                 SDL_Rect rct = map.dst_rects[location];
-               
+
+                // Append camera movement   
                 rct.x += camera.dx;
                 rct.y += camera.dy;
             
                 SDL_RenderCopy(state.ptr_renderer, map.mapTileSet.ptr_data, &map.src_rects[location], &rct);
-                drawcalls++;
             }
         }
     }
-    std::cout << "Draw Calls: " << drawcalls << std::endl;
 }
 
 void UnloadTileMap(TileMap &tileMap)

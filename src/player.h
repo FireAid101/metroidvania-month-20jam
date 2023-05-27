@@ -8,7 +8,8 @@
 struct Player
 {
     //Texture playerTexture;
-    SDL_Rect playerCol;    
+    SDL_FRect playerCol;  
+    float vX, vY;
 };
 
 Player LoadPlayer(State &state);

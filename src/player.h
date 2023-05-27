@@ -8,12 +8,12 @@
 struct Player
 {
     //Texture playerTexture;
-    SDL_FRect playerCol;    
+    SDL_Rect playerCol;    
 };
 
 Player LoadPlayer(State &state);
 void UnloadPlayer(Player &player);
 void DrawPlayer(Player &player, State &state, Camera camera);
-void UpdatePlayer(Player &player, float deltaTime, Camera &camera);
+void UpdatePlayer(Player &player, Camera &camera);
 
 #endif 

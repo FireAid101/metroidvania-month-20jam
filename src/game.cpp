@@ -20,9 +20,9 @@ void UnloadGame(Game &game)
 	DestroyState(game.gameState);
 }
 
-void UpdateGame(Game &game, float deltaTime)
+void UpdateGame(Game &game)
 {
-	UpdatePlayer(game.player, deltaTime, game.camera);
+	UpdatePlayer(game.player, game.camera);
 }
 
 void DrawGame(Game &game)

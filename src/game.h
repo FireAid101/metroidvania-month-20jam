@@ -18,7 +18,7 @@ struct Game
 
 void LoadGame(Game &game);
 void UnloadGame(Game &game);
-void UpdateGame(Game &game, float deltaTime);
+void UpdateGame(Game &game);
 void DrawGame(Game &game);
 
 #endif

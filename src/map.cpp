@@ -1,5 +1,7 @@
 #include "map.h"
 
+#define CAMERA_CONSTANT 2
+
 // Camera Handle function -- DO NOT USE IN GAME - THIS IS JUST UNTIL I HAVE A PLAYER
 void HandleCamera(Camera &camera)
 {
@@ -7,26 +9,26 @@ void HandleCamera(Camera &camera)
 
     if (key_state[SDL_SCANCODE_LEFT])
     {
-        camera.x -= 1;
-        camera.dx += 1;
+        camera.x -= CAMERA_CONSTANT;
+        camera.dx += CAMERA_CONSTANT;
     }
 
     if (key_state[SDL_SCANCODE_RIGHT])
     {
-        camera.x += 1;
-        camera.dx -= 1;        
+        camera.x += CAMERA_CONSTANT;
+        camera.dx -= CAMERA_CONSTANT;        
     }
     
     if (key_state[SDL_SCANCODE_UP])
     {
-        camera.y -= 1;
-        camera.dy += 1;    
+        camera.y -= CAMERA_CONSTANT;
+        camera.dy += CAMERA_CONSTANT;    
     }
 
     if (key_state[SDL_SCANCODE_DOWN])
     {
-        camera.y += 1;
-        camera.dy -= 1;    
+        camera.y += CAMERA_CONSTANT;
+        camera.dy -= CAMERA_CONSTANT;    
     }
 }
 
@@ -157,26 +159,26 @@ TileMap LoadTileMap(std::string path, State &state)
     {
         std::cout << "Error: map couldn't be loaded at " << path << std::endl;
     }
-    
+
     mapFile.close();
     return result;
 }
 
 void DrawMap(TileMap map, State &state, Camera &camera)
 {
-    for (int y = 0; y < 20; y++)
+    for (int y = 0; y < 10; y++)
     {
-        for(int x = 0; x < 25; x++)
+        for(int x = 0; x < 10; x++)
         {
             //int location = (camera.y * 20) + (y * 20) + camera.x + x;
             //if (location < map.dst_rects.size())
             //{
-                SDL_Rect rct = map.dst_rects[y * 20 + x];
+                SDL_Rect rct = map.dst_rects[y * 30 + x];
                
                 rct.x += camera.dx;
                 rct.y += camera.dy;
             
-                SDL_RenderCopy(state.ptr_renderer, map.mapTileSet.ptr_data, &map.src_rects[y * 20 + x], &rct);
+                SDL_RenderCopy(state.ptr_renderer, map.mapTileSet.ptr_data, &map.src_rects[y * 30 + x], &rct);
            // }
         }
     }

@@ -32,7 +32,7 @@ void DrawPlayer(Player &player, State &state, Camera camera)
     SDL_RenderFillRectF(state.ptr_renderer, &dst);
 }
 
-void UpdatePlayer(Player &player, Camera &camera)
+void UpdatePlayer(Player &player, Camera &camera, TileMap map)
 {
     // Get keyboard input
     bool movedX = false, movedY = false;
@@ -124,6 +124,50 @@ void UpdatePlayer(Player &player, Camera &camera)
             if (player.vY <= 0)
             {
                 player.vY = 0.0f;
+            }
+        }
+    }
+
+    // Handle collision detection
+    for (int y = 0; y < 15; y++)
+    {
+        for (int x = 0; x < 20; x++)
+        {
+            int location = ((camera.y / 16) * map.width) + (y * map.width) + (camera.x / 16) + x;
+
+            SDL_FRect rect1, rect2;
+            rect1.x = player.playerCol.x;
+            rect1.y = player.playerCol.y;
+            rect1.w = player.playerCol.w;
+            rect1.h = player.playerCol.h;
+
+            SDL_Rect intrect;
+            intrect.x = rect1.x;
+            intrect.y = rect1.y;
+            intrect.w = rect1.w;
+            intrect.h = rect1.h;
+
+            if (map.isSolid[location] == true)
+            {
+                rect2.x = map.dst_rects[location].x;
+                rect2.y = map.dst_rects[location].y;
+                rect2.w = map.dst_rects[location].w;
+                rect2.h = map.dst_rects[location].h;
+                
+                bool left = rect1.x + rect1.w + player.vX > rect2.x && rect1.x < rect2.x && rect1.y + rect1.h > rect2.y && rect1.y < rect2.y + rect2.h;                
+                bool right = rect1.x + player.vX < rect2.x + rect2.w && rect1.x + rect1.w > rect2.x + rect2.w && rect1.y + rect1.h > rect2.y && rect1.y < rect2.y + rect2.h;                
+                bool top = rect1.y + rect1.h + player.vY > rect2.y && rect1.y < rect2.y && rect1.x + rect1.w > rect2.x && rect1.x < rect2.x + rect2.w;                
+                bool bottom = rect1.y + player.vY < rect2.y + rect2.h && rect1.y + rect1.h > rect2.y + rect2.h && rect1.x + rect1.w > rect2.x && rect1.x < rect2.x + rect2.w;               
+
+                if ((player.vX > 0 && left == true) || (player.vX < 0 && right == true))
+                {
+                    player.vX = 0;
+                }
+
+                if ((player.vY > 0 && top == true) || (player.vY < 0 && bottom == true))
+                {
+                    player.vY = 0;
+                } 
             }
         }
     }

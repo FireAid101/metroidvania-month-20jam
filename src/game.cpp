@@ -22,7 +22,7 @@ void UnloadGame(Game &game)
 
 void UpdateGame(Game &game)
 {
-	UpdatePlayer(game.player, game.camera);
+	UpdatePlayer(game.player, game.camera, game.tileMap);
 }
 
 void DrawGame(Game &game)

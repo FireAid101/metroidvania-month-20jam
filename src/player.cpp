@@ -134,18 +134,12 @@ void UpdatePlayer(Player &player, Camera &camera, TileMap map)
         for (int x = 0; x < 20; x++)
         {
             int location = ((camera.y / 16) * map.width) + (y * map.width) + (camera.x / 16) + x;
-
+            
             SDL_FRect rect1, rect2;
             rect1.x = player.playerCol.x;
             rect1.y = player.playerCol.y;
             rect1.w = player.playerCol.w;
             rect1.h = player.playerCol.h;
-
-            SDL_Rect intrect;
-            intrect.x = rect1.x;
-            intrect.y = rect1.y;
-            intrect.w = rect1.w;
-            intrect.h = rect1.h;
 
             if (map.isSolid[location] == true)
             {

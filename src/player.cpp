@@ -30,12 +30,19 @@ void DrawPlayer(Player &player, State &state, Camera camera)
     dst.y = player.playerCol.y + camera.dy; 
 
     SDL_RenderFillRectF(state.ptr_renderer, &dst);
+
+    SDL_FPoint center;
+    center.x = dst.x + dst.w / 2;
+    center.y = dst.y + dst.h / 2;
+
 }
 
 void UpdatePlayer(Player &player, Camera &camera, TileMap map)
 {
     // Get keyboard input
-    bool movedX = false, movedY = false;
+    bool movedX = false;
+    float limit = 2.0f;
+
     const Uint8 *keys = SDL_GetKeyboardState(NULL);
 
     if (keys[SDL_SCANCODE_LEFT])
@@ -49,7 +56,7 @@ void UpdatePlayer(Player &player, Camera &camera, TileMap map)
         }
     }
     
-    if(keys[SDL_SCANCODE_RIGHT])
+    if (keys[SDL_SCANCODE_RIGHT])
     {
         movedX = true;
         player.vX += 0.2f;
@@ -59,29 +66,34 @@ void UpdatePlayer(Player &player, Camera &camera, TileMap map)
             player.vX = 2.0f;
         }
     }
-    
-    if (keys[SDL_SCANCODE_UP])
-    {
-        movedY = true;
-        player.vY -= 0.2f;
 
-        if (player.vY < -2.0f)
-        {
-            player.vY = -2.0f;
-        }
+    if (keys[SDL_SCANCODE_UP] && player.canJump == true && player.once == false)
+    {
+        player.once = true;
+        player.mustFall = false;
+        player.frames = 0;
     }
-    
+
+    // Press to fall faster
     if (keys[SDL_SCANCODE_DOWN])
     {
-        movedY = true;
-        player.vY += 0.2f;
-
-        if (player.vY > 2.0f)
-        {
-            player.vY = 2.0f;
-        }
+        limit = 4.0f;
     }
-    
+    else
+    {
+        limit = 2.0f;
+    }
+
+    if (player.mustFall == true)
+    {
+        player.vY += 0.2f;
+    }
+
+    if (player.vY > limit)
+    {
+        player.vY = limit;
+    }
+
     if (movedX == false)
     {
         if (player.vX < 0)
@@ -105,27 +117,20 @@ void UpdatePlayer(Player &player, Camera &camera, TileMap map)
         }
     }
 
-    if (movedY == false)
+    if (player.canJump == true && player.frames < 6000/60)
     {
-        if (player.vY < 0)
-        {
-            player.vY += 0.4f;
+        player.vY -= 0.4f;
+        player.frames += 1000/60;
+    }
+    else if (player.canJump == true && player.frames >= 6000/60)
+    {
+        player.mustFall = true;
+        player.canJump = false;
+    }
 
-            if (player.vX >= 0)
-            {
-                player.vX = 0.0f;
-            }
-        }
-        
-        if (player.vY > 0)
-        {
-            player.vY -= 0.4f;
-
-            if (player.vY <= 0)
-            {
-                player.vY = 0.0f;
-            }
-        }
+    if (player.vY < -4.0f)
+    {
+        player.vY = -4.0f;
     }
 
     // Handle collision detection
@@ -134,13 +139,10 @@ void UpdatePlayer(Player &player, Camera &camera, TileMap map)
         for (int x = 0; x < 20; x++)
         {
             int location = ((camera.y / 16) * map.width) + (y * map.width) + (camera.x / 16) + x;
-            
-            SDL_FRect rect1, rect2;
-            rect1.x = player.playerCol.x;
-            rect1.y = player.playerCol.y;
-            rect1.w = player.playerCol.w;
-            rect1.h = player.playerCol.h;
 
+            SDL_FRect rect1, rect2;
+            rect1 = player.playerCol;
+            
             if (map.isSolid[location] == true)
             {
                 rect2.x = map.dst_rects[location].x;
@@ -162,10 +164,17 @@ void UpdatePlayer(Player &player, Camera &camera, TileMap map)
                 {
                     player.vY = 0;
                 } 
+
+                if (player.vY == 0 && top == true)
+                {
+                    player.canJump = true;
+                    player.once = false;
+                }
             }
         }
     }
 
+    // Update player position
     player.playerCol.x += player.vX;
     player.playerCol.y += player.vY;
 
@@ -188,7 +197,21 @@ void UpdatePlayer(Player &player, Camera &camera, TileMap map)
     }
     else if (player.playerCol.y > camera.y + 190)
     {
-        camera.y += 2;
-        camera.dy -= 2;
+        if (limit == 2.0f)
+        {
+            camera.y += 2;
+            camera.dy -= 2;
+        }
+        else 
+        {
+            camera.y += 4;
+            camera.dy -= 4;
+        }
+        
+    }
+
+    if (keys[SDL_SCANCODE_SPACE])
+    {
+        std::cout << player.canJump << " " << player.frames << " " << player.mustFall << " " << player.once << std::endl;
     }
 }

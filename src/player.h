@@ -11,6 +11,8 @@ struct Player
     //Texture playerTexture;
     SDL_FRect playerCol;  
     float vX, vY;
+    bool canJump = false, mustFall = true, once = false;
+    int frames = 0;
 };
 
 Player LoadPlayer(State &state);

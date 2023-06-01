@@ -20,6 +20,12 @@ Texture LoadTexture(std::string path, State &state)
    
     result.ptr_data = SDL_CreateTextureFromSurface(state.ptr_renderer, surf);
 
+    int width, height;
+    SDL_QueryTexture(result.ptr_data, NULL, NULL, &width, &height);
+
+    result.width = width;
+    result.height = height;
+
     SDL_FreeSurface(surf); 
 
     return result;    

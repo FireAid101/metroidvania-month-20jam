@@ -3,7 +3,9 @@
 
 #include "engine/state.h" 
 #include "engine/graphics.h"
+#include "engine/phy_body.h"
 #include "map.h"
+
 #include <SDL2/SDL_rect.h>
 
 struct Player

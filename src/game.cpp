@@ -11,6 +11,8 @@ void LoadGame(Game &game)
 
 	game.camera.x = 0;
 	game.camera.y = 0;
+	game.camera.dx = 0;
+	game.camera.dy = 0;
 }
 
 void UnloadGame(Game &game)

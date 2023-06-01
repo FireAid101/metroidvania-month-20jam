@@ -64,7 +64,6 @@ void UpdatePlayer(Player &player, Camera &camera, TileMap map)
 
     if (keys[SDL_SCANCODE_UP])
     {
-
         if (player.trigger == false)
         {
             if (player.jump == false && player.ready == true)
@@ -107,7 +106,6 @@ void UpdatePlayer(Player &player, Camera &camera, TileMap map)
         }
     }
 
-
     if (player.fall == true)
     {
         player.vY += 0.2f;
@@ -148,21 +146,8 @@ void UpdatePlayer(Player &player, Camera &camera, TileMap map)
                 rect2.y = map.dst_rects[location].y;
                 rect2.w = map.dst_rects[location].w;
                 rect2.h = map.dst_rects[location].h;
-                
-                bool left = rect1.x + rect1.w + player.vX > rect2.x && rect1.x < rect2.x && rect1.y + rect1.h > rect2.y && rect1.y < rect2.y + rect2.h;                
-                bool right = rect1.x + player.vX < rect2.x + rect2.w && rect1.x + rect1.w > rect2.x + rect2.w && rect1.y + rect1.h > rect2.y && rect1.y < rect2.y + rect2.h;                
-                bool top = rect1.y + rect1.h + player.vY > rect2.y && rect1.y < rect2.y && rect1.x + rect1.w > rect2.x && rect1.x < rect2.x + rect2.w;                
-                bool bottom = rect1.y + player.vY < rect2.y + rect2.h && rect1.y + rect1.h > rect2.y + rect2.h && rect1.x + rect1.w > rect2.x && rect1.x < rect2.x + rect2.w;               
 
-                if ((player.vX > 0 && left == true) || (player.vX < 0 && right == true))
-                {
-                    player.vX = 0;
-                }
-
-                if ((player.vY > 0 && top == true) || (player.vY < 0 && bottom == true))
-                {
-                    player.vY = 0;
-                } 
+                CollisionResults colRes = HandleCollisions(rect1, rect2, player.vX, player.vY);
 
                 if (rect1.y + rect1.h + 0.2f >= rect2.y && player.letGo == true && keys[SDL_SCANCODE_UP])
                 {
@@ -170,7 +155,7 @@ void UpdatePlayer(Player &player, Camera &camera, TileMap map)
                 }
 
                 // Cases for jumping
-                if (player.jump == true && bottom == true)
+                if (player.jump == true && colRes.bottom == true)
                 {
                     player.jump = false;
                     player.fall = true;
@@ -178,7 +163,7 @@ void UpdatePlayer(Player &player, Camera &camera, TileMap map)
                     player.letGo = false;
                 }
 
-                if (player.vY == 0 && top == true)
+                if (player.vY == 0 && colRes.top == true)
                 {
                     player.ready = true;
                     player.jump = false;

@@ -5,12 +5,14 @@
 #include "engine/graphics.h"
 #include "map.h"
 #include "player.h"
+#include "enemies.h"
 
 struct Game 
 {
     State gameState;
 
     Player player;
+    Enemy enemy;
 
     Camera camera;
     TileMap tileMap;

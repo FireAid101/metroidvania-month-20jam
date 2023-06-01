@@ -8,6 +8,7 @@ void LoadGame(Game &game)
 	game.tileMap = LoadTileMap("rsrc/maps/testmap.map", game.gameState);
 	
 	game.player = LoadPlayer(game.gameState);
+	game.enemy = LoadEnemy(game.gameState);
 
 	game.camera.x = 0;
 	game.camera.y = 0;
@@ -17,6 +18,7 @@ void LoadGame(Game &game)
 
 void UnloadGame(Game &game)
 {
+	UnloadEnemy(game.enemy);
 	UnloadPlayer(game.player);
 	UnloadTileMap(game.tileMap);
 	DestroyState(game.gameState);
@@ -24,6 +26,7 @@ void UnloadGame(Game &game)
 
 void UpdateGame(Game &game)
 {
+	UpdateEnemy(game.enemy, game.camera, game.tileMap);
 	UpdatePlayer(game.player, game.camera, game.tileMap);
 }
 
@@ -34,6 +37,7 @@ void DrawGame(Game &game)
 	DrawMap(game.tileMap, game.gameState, game.camera);
 
 	DrawPlayer(game.player, game.gameState, game.camera);
- 
+	DrawEnemy(game.enemy, game.gameState, game.camera);
+
     EndDrawState(game.gameState);
 }

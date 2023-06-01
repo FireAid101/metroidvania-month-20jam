@@ -11,7 +11,7 @@ struct Player
     //Texture playerTexture;
     SDL_FRect playerCol;  
     float vX, vY;
-    bool trigger = false, jump = false, fall = true, ready = false;
+    bool trigger = false, jump = false, fall = true, ready = false, letGo = false;
     int frames = 0;
 };
 

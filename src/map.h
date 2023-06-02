@@ -43,4 +43,6 @@ struct TileMap
 TileMap LoadTileMap(std::string path, State &state);
 void UnloadTileMap(TileMap &tileMap);
 void DrawMap(TileMap map, State &state, Camera &camera);
+
+bool IsEntityVisible(SDL_FRect entRect, Camera camera);
 #endif

@@ -9,6 +9,7 @@ void LoadGame(Game &game)
 	
 	game.player = LoadPlayer(game.gameState);
 	game.enemy = LoadEnemy(game.gameState);
+	game.item = LoadItem(itemHealth, game.gameState, 5, 5);
 
 	game.camera.x = 0;
 	game.camera.y = 0;
@@ -18,6 +19,7 @@ void LoadGame(Game &game)
 
 void UnloadGame(Game &game)
 {
+	UnloadItem(game.item);
 	UnloadEnemy(game.enemy);
 	UnloadPlayer(game.player);
 	UnloadTileMap(game.tileMap);
@@ -26,6 +28,7 @@ void UnloadGame(Game &game)
 
 void UpdateGame(Game &game)
 {
+	UpdateItem(game.item, game.player, game.camera);
 	UpdateEnemy(game.enemy, game.camera, game.tileMap, game.player);
 	UpdatePlayer(game.player, game.camera, game.tileMap);
 }
@@ -36,6 +39,7 @@ void DrawGame(Game &game)
     	
 	DrawMap(game.tileMap, game.gameState, game.camera);
 
+	DrawItem(game.item, game.gameState, game.camera);
 	DrawPlayer(game.player, game.gameState, game.camera);
 	DrawEnemy(game.enemy, game.gameState, game.camera);
 

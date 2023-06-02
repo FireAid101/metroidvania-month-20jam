@@ -1,12 +1,4 @@
-#include "enemies.h"
-
-bool IsEnemyVisible(Enemy enemy, Camera camera)
-{
-    return enemy.enemyCol.x + enemy.enemyCol.w > camera.x - 30 && 
-        enemy.enemyCol.x + enemy.enemyCol.w < camera.x + 350 && 
-        enemy.enemyCol.y + enemy.enemyCol.h > camera.y - 30 &&
-        enemy.enemyCol.y + enemy.enemyCol.h < camera.y + 270;
-}
+#include "enemies.h" 
 
 Enemy LoadEnemy(State &state)
 {
@@ -27,7 +19,7 @@ void UnloadEnemy(Enemy &enemy)
 
 void DrawEnemy(Enemy &enemy, State &state, Camera camera)
 {
-    if (IsEnemyVisible(enemy, camera) == true)
+    if (IsEntityVisible(enemy.enemyCol, camera) == true)
     {
         SDL_SetRenderDrawColor(state.ptr_renderer, 200, 0, 0, 255);
 
@@ -43,7 +35,7 @@ void DrawEnemy(Enemy &enemy, State &state, Camera camera)
 
 void UpdateEnemy(Enemy &enemy, Camera &camera, TileMap map, Player &player)
 {
-    if (IsEnemyVisible(enemy, camera) == true)
+    if (IsEntityVisible(enemy.enemyCol, camera) == true)
     {
         if (enemy.fall == true)
         {

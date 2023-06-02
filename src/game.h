@@ -6,6 +6,7 @@
 #include "map.h"
 #include "player.h"
 #include "enemies.h"
+#include "items.h"
 
 struct Game 
 {
@@ -13,6 +14,7 @@ struct Game
 
     Player player;
     Enemy enemy;
+    Item item;
 
     Camera camera;
     TileMap tileMap;

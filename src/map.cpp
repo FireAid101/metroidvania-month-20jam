@@ -1,5 +1,13 @@
 #include "map.h"
 
+bool IsEntityVisible(SDL_FRect entRect, Camera camera)
+{
+     return entRect.x + entRect.w > camera.x - 30 && 
+        entRect.x + entRect.w < camera.x + 350 && 
+        entRect.y + entRect.h > camera.y - 30 &&
+        entRect.y + entRect.h < camera.y + 270;
+}
+
 // Creates and loads the whole tilemap
 TileMap LoadTileMap(std::string path, State &state)
 {

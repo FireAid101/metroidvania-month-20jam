@@ -10,7 +10,6 @@ struct Enemy
     bool jump = false, fall = true, ready = false;
 };
 
-bool IsEnemyVisible(Enemy enemy, Camera camera);
 Enemy LoadEnemy(State &state);
 void UnloadEnemy(Enemy &enemy);
 void DrawEnemy(Enemy &enemy, State &state, Camera camera);

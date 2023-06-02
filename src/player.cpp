@@ -21,6 +21,19 @@ void UnloadPlayer(Player &player)
 
 void DrawPlayer(Player &player, State &state, Camera camera)
 {
+    SDL_SetRenderDrawColor(state.ptr_renderer, 255, 0, 0, 255);
+    // GUI
+    for (int i = 0; i < player.health; i++)
+    {
+        SDL_Rect box;
+        box.x = 10 + (15 * i);
+        box.y = 10;
+        box.w = 10;
+        box.h = 10;   
+
+        SDL_RenderFillRect(state.ptr_renderer, &box);
+    }
+
     SDL_SetRenderDrawColor(state.ptr_renderer, 0, 200, 0, 255);
 
     SDL_FRect dst;
@@ -130,6 +143,21 @@ void UpdatePlayer(Player &player, Camera &camera, TileMap map)
         }
     }
 
+    if (player.hit == true)
+    {
+        if (player.hitframes < 10)
+        {
+            player.vX = player.oppVx;
+            player.vY = player.oppVy;
+            player.hitframes++;   
+        }
+        else
+        {
+            player.hitframes = 0;
+            player.hit = false;
+        }
+    }
+
     // Handle collision detection
     for (int y = 0; y < 15; y++)
     {
@@ -173,7 +201,6 @@ void UpdatePlayer(Player &player, Camera &camera, TileMap map)
             }
         }
     }
-
     // Update player position
     player.playerCol.x += player.vX;
     player.playerCol.y += player.vY;

@@ -14,6 +14,6 @@ bool IsEnemyVisible(Enemy enemy, Camera camera);
 Enemy LoadEnemy(State &state);
 void UnloadEnemy(Enemy &enemy);
 void DrawEnemy(Enemy &enemy, State &state, Camera camera);
-void UpdateEnemy(Enemy &enemy, Camera &camera, TileMap map);
+void UpdateEnemy(Enemy &enemy, Camera &camera, TileMap map, Player &player);
 
 #endif

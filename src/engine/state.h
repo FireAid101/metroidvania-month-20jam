@@ -22,5 +22,4 @@ void StartDrawState(State &state);
 void EndDrawState(State &state);
 void DestroyState(State &state);
 
-
 #endif

@@ -11,9 +11,11 @@
 struct Player
 {
     //Texture playerTexture;
-    SDL_FRect playerCol;  
-    float vX = 0, vY = 0;
-    bool trigger = false, jump = false, fall = true, ready = false, letGo = false;
+    SDL_FRect playerCol; 
+    int health = 3, max_health = 3; 
+    float vX = 0, vY = 0, oppVx = 0, oppVy = 0;
+    int hitframes = 0;
+    bool trigger = false, jump = false, fall = true, ready = false, letGo = false, hit = false;
 };
 
 Player LoadPlayer(State &state);

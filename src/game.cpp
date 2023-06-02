@@ -26,7 +26,7 @@ void UnloadGame(Game &game)
 
 void UpdateGame(Game &game)
 {
-	UpdateEnemy(game.enemy, game.camera, game.tileMap);
+	UpdateEnemy(game.enemy, game.camera, game.tileMap, game.player);
 	UpdatePlayer(game.player, game.camera, game.tileMap);
 }
 
